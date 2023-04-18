@@ -16,9 +16,16 @@ namespace Pizzeria.Api
         }
 
         [HttpGet]
-        public IActionResult GetList()
+        public IActionResult Get()
         {
             IQueryable<Pizza> pizzas = _context.Pizzas;
+            return Ok(pizzas);
+        }
+
+        [HttpGet("{filter}")]
+        public IActionResult Get(string filter)
+        {
+            IQueryable<Pizza> pizzas = _context.Pizzas.Where(p => p.Name.Contains(filter));
             return Ok(pizzas);
         }
     }
