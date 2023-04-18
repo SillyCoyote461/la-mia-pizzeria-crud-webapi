@@ -1,0 +1,59 @@
+﻿@model Pizza[]
+
+@{
+    ViewData["Title"] = "Home Page";
+    var pizzas = Model;
+    using PizzaContext _context = new PizzaContext();
+    Category[] categories = _context.Categories.ToArray();
+    _context.Dispose();
+}
+
+            
+<main class="pt-4">
+    @if (User.IsInRole("ADMIN"))
+    {
+        <div class="mb-2">
+            <a class="btn btn-success" href="@Url.Action("Create", "Pizza")"> Add pizza</a>
+        </div>        
+    }
+
+    <div>
+        @*pizza container*@
+        <div class="d-flex justify-content-evenly flex-wrap">
+
+            @*pizza cards*@
+            @foreach(var pizza in pizzas)
+            {
+                <div class="card mb-5 bg-black bg-opacity-10" style="width: 18rem;">
+                    <img src="@pizza.Image" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@pizza.Name</h5>
+                        <p class="card-text">@pizza.Description</p>
+                    </div>
+                    <div class="card-body">
+                        @if(pizza.Category != null)
+                        {
+                            <p class="m-0"><b>Categoria: </b>@pizza.Category.Name </p>
+                        }
+
+                        <p class="m-0"><b>Prezzo: </b> @pizza.Price €</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="@Url.Action("Details", "Pizza", new {Id = pizza.Id})" class="btn btn-primary">Details</a>
+                        @if (User.IsInRole("ADMIN"))
+                        {                            
+                            <a href="@Url.Action("Update", "Pizza", new {Id = pizza.Id})" class="btn btn-success">Update</a>
+                            <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post" class="btn btn-danger">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="border-0 bg-transparent">
+                                    Delete
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>

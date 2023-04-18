@@ -1,0 +1,40 @@
+﻿@model Pizza
+@{
+    ViewData["Title"] = "details";
+    var pizza = Model;
+}
+
+<div class="container">
+    <h2 class="title">@pizza.Name</h2>
+    <div class="flex-detail">
+        <img src="/img/@pizza.Image" style="height:400px;">
+        <div>
+            <p><b>Descrizione: </b>@pizza.Description</p>
+            <p><b>Prezzo: </b>@pizza.Price €</p>
+            @if (pizza.Category != null)
+            {
+                <p><b>Categoria: </b>@pizza.Category.Name</p>
+            }
+            @if (pizza.Ingredients.Count() != 0)
+            {
+                <p>
+                    <b>Ingredienti: </b>
+                    @for (int i = 0; i < pizza.Ingredients.Count(); i++)
+                    {
+                        if(i < pizza.Ingredients.Count() - 1)
+                        {
+                            <text> @pizza.Ingredients[i].Name, </text>
+                        }
+                        else
+                        {
+                            <text> @pizza.Ingredients[i].Name. </text>
+                        }
+                    }
+                </p>
+
+            }
+
+        </div>
+    </div>
+
+</div>
