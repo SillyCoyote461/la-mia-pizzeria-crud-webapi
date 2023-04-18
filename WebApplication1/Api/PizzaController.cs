@@ -28,5 +28,49 @@ namespace Pizzeria.Api
             IQueryable<Pizza> pizzas = _context.Pizzas.Where(p => p.Name.Contains(filter));
             return Ok(pizzas);
         }
+
+        [HttpPost]
+        public IActionResult CreatePizza(Pizza pizza)
+        {
+            _context.Pizzas.Add(pizza);
+            _context.SaveChanges();
+
+            return Ok(pizza);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Pizza edit)
+        {
+            Pizza record = _context.Pizzas.FirstOrDefault(p => p.Id == id);
+            if (record is null)
+            {
+                return NotFound();
+            }
+
+            record.Name = edit.Name;
+            record.Description = edit.Description;
+            record.Price = edit.Price;
+            record.CategoryId = edit.CategoryId;
+            record.Ingredients = edit.Ingredients;
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Pizza record = _context.Pizzas.FirstOrDefault(p => p.Id == id);
+            if(record is null)
+            {
+                return NotFound();
+            }
+
+            _context.Pizzas.Remove(record);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
