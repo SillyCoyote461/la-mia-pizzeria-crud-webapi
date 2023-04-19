@@ -189,6 +189,11 @@ namespace Pizzeria.Controllers
             return View();
         }
 
+        public IActionResult ApiUpdate(int id)
+        {
+            return View(id);
+        }
+
         public IActionResult ApiDelete()
         {
             return View();

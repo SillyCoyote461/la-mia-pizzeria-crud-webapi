@@ -22,12 +22,20 @@ namespace Pizzeria.Api
             return Ok(pizzas);
         }
 
-        [HttpGet("{filter}")]
+        [HttpGet("filter")]
         public IActionResult Get(string filter)
         {
             IQueryable<Pizza> pizzas = _context.Pizzas.Where(p => p.Name.Contains(filter));
             return Ok(pizzas);
         }
+
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            IQueryable<Pizza> pizza = _context.Pizzas.Where(p => p.Id == id);
+            return Ok(pizza);
+        }
+
 
         [HttpPost]
         public IActionResult CreatePizza(Pizza pizza)
