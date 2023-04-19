@@ -1,0 +1,62 @@
+﻿
+<div class="container-lg mt-5">
+	<form id="create-form" method="post" >
+
+		@*name*@
+		<div class="mb-3">
+			<label class="col-form-label">Name</label>
+			<input id="name-form" class="form-control" />
+			<span class="text-danger"></span>
+		</div>
+
+		@*description*@
+		<div class="mb-3">
+			<label class="col-form-label">Description</label>
+			<textarea id="description-form" class="form-control" placeholder="Put here pizza's description..'"></textarea>
+			<span class="text-danger"></span>
+		</div>
+		<div class="row g-3">
+
+			@*price*@
+			<div class="col-4">
+				<label class="form-label">Price</label>
+				<input id="price-form" class="form-control">
+				<span class="text-danger"></span>
+			</div>
+
+			@*category*@
+			<div class="col-4">
+				<label class="form-label">Category</label>
+				<select id="category-form" class="form-select">
+					<option selected value="">Choose...</option>
+
+				</select>
+				<span class="text-danger"></span>
+			</div>
+
+			@*ingredients*@
+			<div class="col-4">
+				<label class="form-label">Ingredienti</label>
+				<select class="form-select">
+					<option value="0">N/D</option>
+				</select>
+			</div>
+		</div>
+
+		@*image*@
+		<div class="mb-3">
+			<label class="col-form-label">Image</label>
+			<input id="image-form" class="form-control" />
+			<span class="text-danger"></span>
+		</div>
+
+		@*submit*@
+		<button id="submit-form" type="submit" class="btn btn-dark">Create</button>
+	</form>
+</div>
+
+@section Scripts{
+	<script>
+		initializeCreate()
+	</script>
+}

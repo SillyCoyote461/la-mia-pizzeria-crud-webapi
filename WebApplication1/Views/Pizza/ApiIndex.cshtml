@@ -1,0 +1,22 @@
+﻿<main class="pt-4">
+    @if (User.IsInRole("ADMIN"))
+    {
+        <div class="mb-2">
+            <a class="btn btn-success" href="@Url.Action("ApiCreate", "Pizza")"> Add pizza</a>
+        </div>
+    }
+
+    <div>
+        @*pizza container*@
+        <div id="table" class="d-flex justify-content-evenly flex-wrap">
+
+
+        </div>
+    </div>
+</main>
+
+@section Scripts{
+    <script>
+        initialize()
+    </script>
+}

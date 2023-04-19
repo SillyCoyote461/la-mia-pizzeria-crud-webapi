@@ -177,5 +177,22 @@ namespace Pizzeria.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //API
+        public IActionResult ApiIndex()
+        {
+            return View();
+        }
+
+        public IActionResult ApiCreate()
+        {
+            return View();
+        }
+
+        public IActionResult ApiDelete()
+        {
+            return View();
+        }
+
     }
 }
